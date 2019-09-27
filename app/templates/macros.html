@@ -1,23 +1,21 @@
 
-{% macro display(category_list) %}
+{% macro display(blog_list) %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="row">
-	{% if category_list %}
-		{% for category in category_list %}
+	{% if blog_list %}
+		{% for blog in blog_list %}
 		<div class="col-md-6">
 			<div class="thumbnail text-center">
-			<h5 class="card-header">{{category.title}}</h5>
-			<h5 class="card-header">{{category.category}}</h5>
+			<h5 class="card-header">{{blog.title}}</h5>
+			<h5 class="card-header">{{blog.blog}}</h5>
 			<div class="card-body">
 				<blockquote class="blockquote mb-0">
-					<h2>{{category.description}}</h2>
-					<footer class="blockquote-footer"> Posted by {{category.user.username}}</footer>
+					<h2>{{blog.description}}</h2>
+					<footer class="blockquote-footer"> Posted by {{blog.user.username}}</footer>
 				</blockquote>
 				
-				<a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-info"> Add a comment</a>
-				<a href="{{url_for('main.upvote',pitch_id = category.id)}}"><i class="fa fa-thumbs-up" style="font-size:24px;color:lightblue"></i> <span>{{category.upvotes.count()}}</span></a>
-				<a href="{{url_for('main.downvote',pitch_id = category.id)}}"><i class="fa fa-thumbs-down" style="font-size:24px;color:lightblue"></i> <span>{{category.downvotes.count()}}</span></a>
-
+				<a href="{{url_for('main.new_comment',blog_id = blog.id)}}" class="btn btn-info"> Add a comment</a>
+				
 
 			</div>
 		</div>
