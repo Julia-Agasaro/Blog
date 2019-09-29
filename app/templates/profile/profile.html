@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container">
 <div class="row">
  <div class="col-md-4">
@@ -28,6 +29,27 @@
    </form>
  </div>
 </div>
+<div>
+  <h1 style="color:lightblue; text-align: center;text-underline-position: below">Your blogs:</h1>
+  {% for blog in description %}
+  <div class="col-md-6">
+    <div class="thumbnail text-center">
+    
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <h2>{{blog.description}}</h2>
+        <footer class="blockquote-footer"> Posted by {{blog.user.username}}</footer>
+      </blockquote>
+      
+      <a href="{{url_for('main.new_comment',blog_id = blog.id)}}" class="btn btn-info"> Add a comment</a>
+      <a href="{{url_for('main.delete',blog_id = blog.id)}}"><i class="fa fa-trash-o" style="font-size:36px"></i></a>
+      <a href="{{url_for('main.update_blog',blog_id = blog.id)}}" class="btn btn-info"> Update Blog</a>
 
+    </div>
+  </div>
+
+  </div>
+     {% endfor %}
+</div>
 </div>
 {% endblock %}
