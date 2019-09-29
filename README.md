@@ -1,5 +1,5 @@
-# PitchIt
-A web application that lets users submit pitches based on different categories
+# Blog App
+A web application that lets users submit Blogs 
 [check it out](https://pitchall.herokuapp.com/)
 
 # Author
@@ -7,7 +7,8 @@ Julia Agasaro
 
 # Description
 
-This is an application that allows a user to create a pitch depending on a certain category and add pitch content. A user can also be able to comment and vote on another user's pitches.
+This is an application that allows a user to create a blog and add Blog content. A user can also be able to comment  on another user's Blogs.
+A writer is able to Delete and Update His/Her blogs.
 
 
 # Technologies Used
