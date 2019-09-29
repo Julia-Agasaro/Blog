@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,BooleanField,SubmitField,TextAreaField,RadioField
+from wtforms import StringField,PasswordField,SubmitField,BooleanField,SubmitField,TextAreaField
 from wtforms.validators import Required,Email,EqualTo
 
 class UpdateProfile(FlaskForm):
