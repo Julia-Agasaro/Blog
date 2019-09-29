@@ -24,8 +24,6 @@ def index():
     
 
 
-
-
 @main.route('/blogs/new/', methods = ['GET','POST'])
 @login_required
 def new_blog():
@@ -37,10 +35,11 @@ def new_blog():
         new_blog = Blog(user_id =current_user._get_current_object().id, title = title,description=description)
         db.session.add(new_blog)
         db.session.commit()
-        
-        
+        flash('Your post has been created!', 'success')
         return redirect(url_for('main.index'))
-    return render_template('blogs.html',form=form)
+    return render_template('blogs.html', title='New Blog',
+                           form=form, legend='New Blog')
+
 @main.route('/comment/new/<int:blog_id>', methods = ['GET','POST'])
 @login_required
 def new_comment(blog_id):
@@ -63,14 +62,14 @@ def new_comment(blog_id):
 @login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
-    
+    get_blogs = Blog.query.filter_by(user_id = current_user.id).all()
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user = user, description = get_blogs)
 
 
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@main.route('/user/<uname>',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -102,3 +101,35 @@ def update_pic(uname):
         user_photo = PhotoProfile(pic_path = path,user = user)
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/profile/delete/<int:blog_id>', methods = ['GET', 'POST'])
+@login_required
+def delete(blog_id):
+    blog = Blog.query.filter_by(id = blog_id).first()
+    
+    user = current_user
+    
+    db.session.delete(blog)
+    db.session.commit()
+
+    return redirect(url_for('main.profile',uname=uname))
+    return render_template('profile/profile.html',user =user)
+
+
+@main.route("/profile/<int:blog_id>/update_blog", methods=['GET', 'POST'])
+@login_required
+def update_blog(blog_id):
+    blog = Blog.query.filter_by(id = blog_id).first()
+    form = BlogForm()
+    if form.validate_on_submit():
+        Blog.title = form.title.data
+        Blog.description = form.description.data
+        db.session.commit()
+        flash('Your blog has been updated!', 'success')
+        return redirect(url_for('main.profile',uname=uname))
+    elif request.method == 'GET':
+        form.title.data = blog.title
+        form.description.data = blog.description
+    return render_template('blogs.html', title='Update blog',
+                           form=form, legend='Update blog')
+    
