@@ -1,0 +1,1 @@
+Hello {{subscribe.name}} There is a new Blog Posted
