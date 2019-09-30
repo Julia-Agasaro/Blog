@@ -7,9 +7,20 @@ from datetime import datetime
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-
-
+    
+class Quotes:
+  '''
+  Quotes class to define Quote Objects
+  '''
+  def __init__(self,id,author,quote,permalink):
+      self.id =id
+      self.author = author
+      self.quote = quote
+      self.permalink = "http://quotes.stormconsultancy.co.uk/quotes/31"
+  def hello(self):
+        self.s = requests.Session()
+        self.s.headers.update()
+        return True
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
 
@@ -54,7 +65,8 @@ class Blog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     description = db.Column(db.String(), index = True)
     title = db.Column(db.String())
-    
+    comment = db.relationship('Comment', backref = 'blog', lazy = 'dynamic')
+    date_posted = db.Column(db.DateTime)
     
     
     
@@ -62,7 +74,6 @@ class Blog(db.Model):
     def get_blogs(cls, id):
         blogs = Blog.query.order_by(blog_id=id).desc().all()
         return blogs
-
     def __repr__(self):
         return f'Blog {self.description}'
 
@@ -79,4 +90,10 @@ class Comment(db.Model):
     
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.description}"
-
+class Subscription(db.Model):
+   __tablename__ = 'subscribers'
+   id = db.Column(db.Integer, primary_key=True)
+   email = db.Column(db.String(100), unique=True)
+   name = db.Column(db.String(100))
+   def __repr__(self):
+       return f'User {self.name}'
