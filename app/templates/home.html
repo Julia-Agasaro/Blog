@@ -16,11 +16,16 @@
     </ul>
     
     <!-- Tab panes -->
-    
+    <div class="card-body"id="blogs">
       
-      <div class="tab-pane" id="blogs"><br>
-          {{ macro.display(blog) }}
-      </div>
+      <p class="card-text">{{ macro.display(blog) }}</p>
       
     </div>
+      
+    <div class="card-body">
+      
+      <p class="card-text">{{ quotes.quote }}</p>
+      <small>{{ quotes.author }}</small>
+    </div>
+    
   {% endblock %}
