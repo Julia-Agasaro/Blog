@@ -18,7 +18,10 @@
 								<p>{{blog.id}}</p>
 							</div>
 							<h4>{{ blog.description }}</h4>
-							<h6> Posted by {{user.username}}.</h6>
+							<span class="meta">Posted by
+								{{user.username}}
+								on {{ blog.date_posted.strftime('%B %d, %Y') }}</span>
+							
 						</a>
 					</div>
 				{% endfor %}
