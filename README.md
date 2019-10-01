@@ -1,6 +1,6 @@
 # Blog App
 A web application that lets users submit Blogs 
-[check it out](https://pitchall.herokuapp.com/)
+<!-- [check it out](https://pitchall.herokuapp.com/) -->
 
 # Author
 Julia Agasaro
